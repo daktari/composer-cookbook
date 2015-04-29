@@ -21,7 +21,7 @@ docker_image image do
 end
 # Pull tag image
 docker_image image do
-  tag image_tag'
+  tag image_tag
 end
 
 # Run container exposing ports
