@@ -1,15 +1,28 @@
 # Variables
 image = node[:composer][:docker][:image_name]
+image_tag = node[:composer][:docker][:image_tag]
 http_port = node[:composer][:docker][:http_port]
 transport_port = node[:composer][:docker][:transport_port]
 detach = node[:composer][:docker][:detach]
 container_name = node[:composer][:docker][:container_name]
 volume = node[:composer][:docker][:volume]
-# Pull latest image
-docker_image image do
+
+# Stop/Remove Container
+docker_container container_name do
+  action :stop
+end
+docker_container container_name do
   action :remove
 end
-docker_image image
+# Delete image
+docker_image image do
+  tag image_tag
+  action :remove
+end
+# Pull tag image
+docker_image image do
+  tag image_tag'
+end
 
 # Run container exposing ports
 docker_container image do
