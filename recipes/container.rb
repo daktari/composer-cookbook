@@ -6,6 +6,7 @@ transport_port = node[:composer][:docker][:transport_port]
 detach = node[:composer][:docker][:detach]
 container_name = node[:composer][:docker][:container_name]
 volume = node[:composer][:docker][:volume]
+restart_option = node[:composer][:docker][:restart]
 
 # Stop/Remove Container
 docker_container container_name do
@@ -29,7 +30,7 @@ docker_container image do
   detach detach
   port http_port
   port transport_port
-  restart always
+  restart restart_option
   container_name container_name
   volume volume 
 end
