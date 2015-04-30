@@ -19,16 +19,17 @@ docker_image image do
   tag image_tag
   action :remove
 end
-# Pull tag image
+# Pull tagged image
 docker_image image do
   tag image_tag
 end
 
-# Run container exposing ports
+# Run container
 docker_container image do
   detach detach
   port http_port
   port transport_port
+  restart always
   container_name container_name
   volume volume 
 end
