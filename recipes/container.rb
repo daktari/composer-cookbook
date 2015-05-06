@@ -1,12 +1,10 @@
 # Variables
 image = node[:composer][:docker][:image_name]
 image_tag = node[:composer][:docker][:image_tag]
-http_port = node[:composer][:docker][:http_port]
-transport_port = node[:composer][:docker][:transport_port]
+port = node[:composer][:docker][:port]
 detach = node[:composer][:docker][:detach]
 container_name = node[:composer][:docker][:container_name]
 volume = node[:composer][:docker][:volume]
-restart_option = node[:composer][:docker][:restart]
 
 # Stop/Remove Container
 docker_container container_name do
@@ -27,10 +25,9 @@ end
 
 # Run container
 docker_container image do
+  tag image_tag
   detach detach
-  port http_port
-  port transport_port
-  restart restart_option
+  port port
   container_name container_name
   volume volume 
 end
